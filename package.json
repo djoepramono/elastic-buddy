@@ -1,0 +1,18 @@
+{
+  "name": "elastic-buddy",
+  "version": "1.0.0",
+  "description": "Node playground to practice TypeScript and ElasticSearch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run lint -- --fix & rm dist/* & npx tsc -d",
+    "lint": "npx eslint \"src/**\""
+  },
+  "author": "Djoe Pramono",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "eslint": "^7.12.1",
+    "typescript": "^4.0.5"
+  }
+}
