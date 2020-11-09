@@ -1,0 +1,40 @@
+version: "3"
+services:
+  dev:
+    image: node:15.1.0
+    volumes: 
+      - .:/app
+    working_dir: /app
+    command: /bin/bash
+    depends_on: 
+      - elasticsearch
+    networks:
+      - elastic-buddy
+
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    environment:
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - cluster.name=elastic-buddy-cluster
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.port=9200
+      - discovery.type=single-node
+    hostname: 'elasticsearch'
+    networks:
+      - elastic-buddy
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.3
+    environment: 
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic-buddy
+
+networks:
+  elastic-buddy:
+    driver: bridge
