@@ -9,8 +9,12 @@ npm run build
 ## How to run
 
 ```
-docker compose up
+docker-compose up
 ```
+
+# Useful links
+
+- [Elastic Search docs](./docs/ELASTICSEARCH.md)
 
 ## Gotcha
 You need to bump up your vm memory
