@@ -1,9 +1,9 @@
-{  
+{
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
-    }      
+    }
   },
   "plugins": [
     "@typescript-eslint"
@@ -13,7 +13,7 @@
   ],
   "settings": {
   },
-  "rules": {    
+  "rules": {
     "indent": [
         "error",
         4,
@@ -36,7 +36,7 @@
         "error",
         {
             "arrays": "always-multiline",
-            "objects": "always-multiline",
+            "objects": "ignore",
             "imports": "always-multiline",
             "exports": "always-multiline",
             "functions": "ignore"
