@@ -7,6 +7,8 @@ services:
     environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
       KIBANA_HOSTS: "http://kibana:5601"
+    ports:
+      - 8080:8080
     volumes:
       - .:/app
     working_dir: /app
