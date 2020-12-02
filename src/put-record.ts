@@ -1,7 +1,8 @@
 import { Client, RequestParams } from '@elastic/elasticsearch';
 import { Movie } from './movie';
 
-const client = new Client({ node: 'http://localhost:9200' });
+const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
+const client = new Client({ node: esHost });
 
 const run = async () => {
     console.log('putting record');
