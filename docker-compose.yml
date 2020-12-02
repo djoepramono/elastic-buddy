@@ -1,13 +1,17 @@
 version: "3"
 services:
   dev:
-    image: node:15.1.0
-    volumes: 
+    image: elastic-buddy
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+      KIBANA_HOSTS: "http://kibana:5601"
+    volumes:
       - .:/app
     working_dir: /app
-    command: /bin/bash
-    depends_on: 
+    entrypoint: [./scripts/wait-for-elasticsearch]
+    depends_on:
       - elasticsearch
+      - kibana
     networks:
       - elastic-buddy
 
@@ -29,12 +33,10 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.9.3
-    environment: 
+    environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
     ports:
       - 5601:5601
-    depends_on:
-      - elasticsearch
     networks:
       - elastic-buddy
 

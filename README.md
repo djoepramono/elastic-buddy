@@ -1,14 +1,9 @@
 # Elastic Buddy
 
-## How to build
+## Development
 
 ```
-npm run build
-```
-
-## How to run
-
-```
+./scripts/build-dev-image # this is to build the docker dev image
 ./scripts/run
 ```
 
