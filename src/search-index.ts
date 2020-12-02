@@ -1,5 +1,6 @@
 import { Client } from '@elastic/elasticsearch';
 import { SearchResponse } from 'elasticsearch';
+import { Movie } from './movie';
 
 const client = new Client({ node: 'http://localhost:9200' });
 
@@ -10,15 +11,9 @@ interface SearchBody {
     }
 }
 
-interface Source {
-    title: string,
-    year: number,
-    tag: string
-}
-
 const run = async () => {
     console.log('searching index');
-    const response = await client.search<SearchResponse<Source>, SearchBody>({
+    const response = await client.search<SearchResponse<Movie>, SearchBody>({
         index: 'movie',
         body: {
             query: {
