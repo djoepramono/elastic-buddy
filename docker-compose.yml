@@ -2,6 +2,8 @@ version: "3"
 services:
   dev:
     image: elastic-buddy
+    build:
+      context: .
     environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
       KIBANA_HOSTS: "http://kibana:5601"
