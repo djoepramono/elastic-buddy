@@ -17,7 +17,7 @@ interface Source {
 }
 
 const run = async () => {
-    console.log('dsds');
+    console.log('searching index');
     const response = await client.search<SearchResponse<Source>, SearchBody>({
         index: 'movie',
         body: {
