@@ -1,0 +1,4 @@
+#!/bin/bash
+trap "docker-compose down --volumes --remove-orphans" 0
+
+docker-compose up

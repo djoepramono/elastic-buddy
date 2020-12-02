@@ -9,7 +9,7 @@ npm run build
 ## How to run
 
 ```
-docker-compose up
+./scripts/run
 ```
 
 # Useful links
