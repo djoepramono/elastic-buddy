@@ -1,4 +1,8 @@
 #!/bin/bash
 trap "docker-compose down --volumes --remove-orphans" 0
+docker-compose down --volumes --remove-orphans
 
-docker-compose run --rm dev bash
+echo "--- Provisioning dev environment container..."
+docker-compose build
+
+docker-compose run --rm --service-ports dev "${@-bash}"
