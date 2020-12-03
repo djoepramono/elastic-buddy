@@ -4,9 +4,11 @@ are-local-dependencies-up ()
 {
   curl -X GET $ELASTICSEARCH_HOSTS > /dev/null
   es_verifier=$?
-  curl -X GET $KIBANA_HOSTS > /dev/null
-  kibana_verifier=$?
-  if [[ 0 = $es_verifier ]] && [[ 0 = $kibana_verifier ]]
+  # We don't need to check kibana because it's not needed
+  # and by default it can only be accessed using localhost
+  # curl -X GET $KIBANA_HOSTS > /dev/null
+  # kibana_verifier=$?
+  if [ 0 = $es_verifier ]
       then
           true
       else
@@ -17,10 +19,10 @@ are-local-dependencies-up ()
 
 until are-local-dependencies-up;
 do
-  >&2 echo "ES and/or Kibana is unavailable - waiting"
+  >&2 echo "ES is unavailable - waiting"
   sleep 1
 done
 
->&2 echo "ES and/or Kibana is up - moving on"
+>&2 echo "ES is up - moving on"
 
 /bin/bash -c "$@"

@@ -3,7 +3,10 @@
 ## Development
 
 ```
-./scripts/run
+./scripts/run-dependencies  # to run dependencies
+./scripts/run               # to run the main dev image
+npm run build               # to compile typescript files
+node dist/api.js            # to run compiled script, e.g. API server
 ```
 
 # Useful links
