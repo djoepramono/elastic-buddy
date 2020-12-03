@@ -1,9 +1,9 @@
 version: "3"
 services:
   dev:
-    image: elastic-buddy
     build:
       context: .
+    image: elastic-buddy:latest #Output image repo:tag
     environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
       KIBANA_HOSTS: "http://kibana:5601"
@@ -18,7 +18,7 @@ services:
       - elastic-buddy
 
   elasticsearch:
-    image: elasticsearch:7.9.3
+    image: elasticsearch:7.9.3 #Input image repo:tag
     environment:
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
@@ -34,7 +34,7 @@ services:
       - elastic-buddy
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.9.3
+    image: docker.elastic.co/kibana/kibana:7.9.3 #Input image repo:tag
     environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
     ports:

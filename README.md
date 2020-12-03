@@ -3,7 +3,6 @@
 ## Development
 
 ```
-./scripts/build-dev-image # this is to build the docker dev image
 ./scripts/run
 ```
 

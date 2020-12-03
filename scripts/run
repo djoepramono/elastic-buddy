@@ -5,6 +5,4 @@ docker-compose down --volumes --remove-orphans
 echo "--- Provisioning dev environment container..."
 docker-compose build
 
-docker-compose run --rm dev "npm install"
-
-docker-compose run --rm dev "${@-bash}"
+docker-compose run --rm --service-ports dev "${@-bash}"
