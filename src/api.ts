@@ -9,7 +9,7 @@ app.get( '/', ( req, res ) => {
 } );
 
 
-app.get('search/:title', (req, res) => {
+app.get('/search/:title', (req, res) => {
     const searchedTitle = req.params.title;
     res.send(`You are searching for ${searchedTitle}`);
 });
