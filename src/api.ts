@@ -1,17 +1,25 @@
 
+import { Client } from '@elastic/elasticsearch';
 import express from 'express';
+import { searchElasticsearch } from './elasticsearch/search';
 
 const app = express();
 const port = 8080;
+
+const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
+const client = new Client({ node: esHost });
 
 app.get( '/', ( req, res ) => {
     res.send( 'Welcome to Elastic Buddy!' );
 } );
 
 
-app.get('/search/:title', (req, res) => {
+app.get('/search/:title', async (req, res) => {
     const searchedTitle = req.params.title;
-    res.send(`You are searching for ${searchedTitle}`);
+    const response = await searchElasticsearch(client, searchedTitle);
+    const firstResult = (response.body.hits.hits[0]._source);
+    console.log(firstResult);
+    res.send(`The first search result for ${searchedTitle} is ${firstResult.title} from year ${firstResult.year}`);
 });
 
 // start the Express server
