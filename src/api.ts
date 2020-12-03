@@ -2,6 +2,7 @@
 import { Client } from '@elastic/elasticsearch';
 import express from 'express';
 import { searchElasticsearch } from './elasticsearch/search';
+import { Movie } from './movie';
 
 const app = express();
 const port = 8080;
@@ -16,7 +17,7 @@ app.get( '/', ( req, res ) => {
 
 app.get('/search/:title', async (req, res) => {
     const searchedTitle = req.params.title;
-    const response = await searchElasticsearch(client, searchedTitle);
+    const response = await searchElasticsearch<Movie>(client, searchedTitle);
     const firstResult = (response.body.hits.hits[0]._source);
     console.log(firstResult);
     res.send(`The first search result for ${searchedTitle} is ${firstResult.title} from year ${firstResult.year}`);
