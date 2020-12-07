@@ -1,6 +1,7 @@
 import { Client } from '@elastic/elasticsearch';
 
-const client = new Client({ node: 'http://localhost:9200' });
+const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
+const client = new Client({ node: esHost });
 
 const run = async () => {
     console.log('creating index');

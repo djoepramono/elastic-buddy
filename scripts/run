@@ -1,7 +1,4 @@
 #!/bin/bash
-trap "docker-compose down --volumes --remove-orphans" 0
-docker-compose down --volumes --remove-orphans
-
 echo "--- Provisioning dev environment container..."
 docker-compose build
 

@@ -2,7 +2,8 @@ import { Client } from '@elastic/elasticsearch';
 import { SearchResponse } from 'elasticsearch';
 import { Movie } from './movie';
 
-const client = new Client({ node: 'http://localhost:9200' });
+const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
+const client = new Client({ node: esHost });
 
 // Define the type of the body for the Search request
 interface SearchBody {
