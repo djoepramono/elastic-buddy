@@ -13,7 +13,9 @@ const port = 8080;
 const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
 const client = new Client({ node: esHost });
 
-app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'application/json' }));
+// type here is important otherwise it will default,
+// and if the type doesn't match, it won't run the middleware
+app.use(bodyParser.text({ type: 'application/json'}));
 
 app.get( '/', ( req, res ) => {
     res.send( 'Welcome to Elastic Buddy!' );
@@ -45,7 +47,6 @@ app.post('/insert', async (req, res) => {
     res.send(response);
 });
 
-// start the Express server
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );
 } );
