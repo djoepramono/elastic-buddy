@@ -13,8 +13,7 @@ const port = 8080;
 const esHost = process.env.ELASTICSEARCH_HOSTS || 'http://localhost:9200';
 const client = new Client({ node: esHost });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'application/json' }));
 
 app.get( '/', ( req, res ) => {
     res.send( 'Welcome to Elastic Buddy!' );
@@ -35,17 +34,14 @@ const safeJSONParse = (input: string): ErrorOr<Movie> => {
         return isMovie(parseResult) ? parseResult : new Error(`parsing wrong type: ${input}`);
     } catch(e) {
         console.log('parse error');
-        return new Error(`parsing error: ${input}`);
+        console.log(e.message);
+        return new Error(`parsing error: ${input.toString()}`);
     }
 };
 
 app.post('/insert', async (req, res) => {
-    console.log('called');
-    console.log(req.body);
     const errorOrMovie = safeJSONParse(req.body);
-    console.log(errorOrMovie);
-
-    const response = isError(errorOrMovie) ? errorOrMovie : await insertIntoElasticSearch<Movie>(client, errorOrMovie);
+    const response = isError(errorOrMovie) ? errorOrMovie.message : await insertIntoElasticSearch<Movie>(client, errorOrMovie);
     res.send(response);
 });
 
